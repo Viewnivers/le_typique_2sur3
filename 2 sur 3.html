@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Oswald&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Le typique 2 sur 3</title>
+    <style>
+        body {
+            font-family: 'Oswald', sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .type{
+            font-size: 30px;
+        }
+        button {
+            font-size: 16px;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        #counter {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+        .button {
+    text-decoration: none;
+    padding: 10px;
+    font-family: tahoma;
+    font-size: 1em;
+    color: #3f3f3f;
+    background-color: #fac08f;
+    border-radius: 24px;
+    -webkit-border-radius: 24px;
+    -moz-border-radius: 24px;
+    border: 4px solid #FFFFFF;
+    box-shadow: 3px 3px 8px #444444;
+    -webkit-box-shadow: 3px 3px 8px #444444;
+    -moz-box-shadow: 3px 3px 8px #444444;
+    }    
+    
+.button:hover {
+    padding: 10px;
+    font-family: arial;
+    color: #FFFFFF;
+    background-color: #e36c09;
+    box-shadow: 1px 1px 4px #777777;
+    -webkit-box-shadow: 1px 1px 4px #777777;
+    -moz-box-shadow: 1px 1px 4px #777777;
+    }
+
+    </style>
+</head>
+<body>
+    <h1>Le typique 2 sur 3</h1>
+    <div>
+        <h2>typiquement :</h2>
+        <div class="type" id="counter_typiquement">0</div>
+</div>
+    
+    <button class="button" id="incrementButton_+1_typiquement">typiquement +1</button>
+    <button class="button" id="incrementButton_-1_typiquement">typiquement -1</button>
+    <button class="button" id="screenshotButton">Enregistrer le score</button>
+    <button class="button" id="reset">Reset</button>
+
+    <script>
+        // Compteur +1 TYPIQUEMENT
+        let counter = 0;
+        const counterDiv = document.getElementById('counter_typiquement');
+        const incrementButton_typiquement = document.getElementById('incrementButton_+1_typiquement');
+
+        incrementButton_typiquement.addEventListener('click', () => {
+            counter++;
+            counterDiv.textContent = counter;
+        });
+
+        //compteur -1 typiquement
+        const incrementButton = document.getElementById('incrementButton_-1_typiquement');
+        incrementButton.addEventListener('click', () => {
+            counter--;
+            counterDiv.textContent = counter;
+        });
+
+        //compteur reset
+        const reset = document.getElementById('reset');
+
+        reset.addEventListener('click', () => {
+            counter = 0;
+            counterDiv.textContent = 0;
+    });
+        // Fonctionnalité de capture d'écran
+        const screenshotButton = document.getElementById('screenshotButton');
+
+        screenshotButton.addEventListener('click', async () => {
+            try {
+                const canvas = await html2canvas(document.body);
+                const link = document.createElement('a');
+                link.download = 'score.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            } catch (error) {
+                alert('Erreur lors de la capture d\'écran : ' + error.message);
+            }
+        });
+
+        // Inclusion de html2canvas (pour la capture d'écran)
+        const script = document.createElement('script');
+        script.src = "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js";
+        document.head.appendChild(script);
+    </script>
+</body>
+</html>
